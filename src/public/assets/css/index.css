@@ -1,0 +1,573 @@
+/*********************************************************** Importaciones ************************************************************/
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/*********************************************************** Variables Globales ************************************************************/
+:root {
+  --color-primary: #7380ec;
+  --color-danger: #ff7782;
+  --color-success: #41f1b6;
+  --color-warning: #ffbb55;
+  --color-IN: #B22406;
+  --color-white: #fff;
+  --color-info-dark: #7d8da1;
+  --color-info-light: #dce1eb;
+  --color-dark: #363949;
+  --color-light: rgba(132, 139, 200, 0.18);
+  --color-primary-variant: #111e88;
+  --color-dark-variant: #677483;
+  --color-background: #f6f6f9;
+
+  --card-border-radius: 2rem;
+  --border-radius-1: 0.4rem;
+  --border-radius-2: 0.8rem;
+  --border-radius-3: 1.2rem;
+
+  --card-padding: 1rem;
+  --padding-1: 1.2rem;
+
+  --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+/*********************************************************** Estilos Generales ************************************************************/
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  appearance: none;
+  border: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 1rem;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background: var(--color-background);
+  user-select: none;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  color: var(--color-dark);
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Opcional: para alinear verticalmente en el centro */
+}
+
+main {
+  height: 75%;
+  box-shadow: -6px 0 5px -5px rgba(0, 0, 0, 0.5);
+  padding-left: 2rem;
+  margin-top: 2rem;
+}
+
+.colored-panel{
+  color: #C21311;
+  text-shadow: 
+    0 0 5px rgba(255, 255, 255, 0.5),
+    0 0 10px rgba(255, 255, 255, 0.3),
+    0 0 15px rgba(255, 255, 255, 0.2),
+    0 0 20px rgba(255, 255, 255, 0.1);
+  
+}
+
+a {
+  color: var(--color-dark);
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+h1 {
+  font-weight: 800;
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 1.4rem;
+}
+
+h3 {
+  font-size: 0.87rem;
+}
+
+h4 {
+  font-size: 0.8rem;
+}
+
+h5 {
+  font-size: 0.77rem;
+}
+
+small {
+  font-size: 0.75rem;
+}
+/* ))))))))))))))))))))))))))))))))))))))))))))))))))))))) ESTRUCTURA (((((((((((((((((((((((((((((((((((((((((((((((((((((((((( */
+
+/*********************************************************** Sidebar ************************************************************/
+aside {
+  max-height: 100vh;
+  margin-top: 5rem;
+  position: relative;
+  right: 3rem; 
+}
+
+aside .top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+aside .logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+aside .logo img {
+  width: auto;
+  height: 3.5rem;
+  object-fit: contain;
+}
+
+aside .sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 86vh;
+
+  position: relative;
+  
+}
+
+aside h3 {
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+aside .sidebar a {
+  display: flex;
+  color: var(--color-info-dark);
+  margin-left: 1rem;
+  gap: 1rem;
+  align-items: center;
+  position: relative;
+  height: 5rem;
+  transition: all 300ms ease;
+}
+
+aside .sidebar a span {
+  font-size: 2rem;
+  transition: all 300ms ease;
+}
+
+aside .sidebar a:last-child {
+  position: absolute;
+  bottom: 5rem;
+  width: 100%;
+}
+
+aside .sidebar a:active {
+  background: var(--color-light);
+  color: var(--color-IN);
+  margin-left: 0;
+}
+
+aside .sidebar a:active:before {
+  content: "";
+  width: 6px;
+  height: 100%;
+  background: var(--color-IN);
+}
+
+aside .sidebar a:active span {
+  color: var(--color-IN);
+  margin-left: calc(1rem - 3px);
+}
+
+aside .sidebar a:hover {
+  color: var(--color-IN);
+}
+
+aside .sidebar a:hover span {
+  margin-left: 1rem;
+}
+
+/*********************************************************** Submenu Asistencias ************************************************************/
+.sidebar-item {
+  position: relative;
+}
+
+aside .sidebar .dropdown-menu {
+  display: none;
+  padding-left: 3rem;
+  margin-top: 4rem; /* Aumenta el margen superior para mover los elementos hacia abajo */
+  margin-bottom: 0;
+  
+}
+
+aside .sidebar .dropdown-menu.show {
+  display: block;
+}
+
+aside .sidebar .dropdown-menu .dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+aside .sidebar .dropdown-menu .dropdown-item:hover {
+  color: var(--color-IN);
+}
+
+aside .sidebar .dropdown-menu .dropdown-item span {
+  margin-right: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.dropdown-icon {
+  transition: transform 0.3s;
+}
+
+.dropdown-icon.open {
+  transform: rotate(180deg);
+}
+/*********************************************************** Main Content ************************************************************/
+
+
+/* Campo de fecha */
+main .date {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--border-radius-1);
+  margin-top: 2rem;
+  padding: 1rem 3rem;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+main .date:hover {
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.57);
+}
+
+main .date .close-icon {
+  display: none;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: var(--color-dark);
+  cursor: pointer;
+}
+
+main .date.open .close-icon {
+  display: inline-block;
+}
+
+main .date label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+main .date input[type="date"] {
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+main .date #fechaSeleccionada {
+  font-size: 1.2rem;
+  color: var(--color-dark);
+  margin-right: 0.5rem;
+}
+
+main .date .material-icons {
+  font-size: 1.5rem;
+  color: var(--color-dark);
+  transition: color 0.3s ease;
+}
+
+main .date:hover #fechaSeleccionada,
+main .date:hover .material-icons {
+  color: var(--color-dark);
+}
+
+
+
+.date-picker-container {
+  position: relative;
+  margin-bottom: 2rem;
+  display: inline-block;
+}
+
+.date-picker-container .date {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--border-radius-1);
+  padding: 1rem 2rem;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.date-picker-container .date:hover {
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.57);
+}
+
+.date-picker-container .date label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.date-picker-container .date input[type="date"] {
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.date-picker-container .date #fechaSeleccionada {
+  font-size: 1.2rem;
+  color: var(--color-dark);
+  margin-right: 0.5rem;
+  opacity: 1;
+  visibility: visible;
+}
+
+.date-picker-container .date .material-icons {
+  font-size: 1.6rem;
+  color: var(--color-dark);
+  transition: color 0.3s ease;
+}
+
+.date-picker-container .date:hover #fechaSeleccionada,
+.date-picker-container .date:hover .material-icons {
+  color: var(--color-dark);
+}
+
+
+
+/* Tarjetas */
+.empleados,
+.asistencias,
+.inasistencias,
+.periodo-nomina {
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: var(--card-border-radius);
+  position: relative;
+  background-position: center;
+  z-index: 1;
+  cursor: pointer;
+}
+
+
+
+
+.empleados::after,
+.asistencias::after,
+.inasistencias::after,
+.periodo-nomina::after {
+  border-radius: var(--card-border-radius);
+  content: '';
+  background-image: linear-gradient(to top, #5e2d05, #000000);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+}
+
+.empleados {
+  background-image: url(/images/empleados.jpg);
+}
+
+.asistencias {
+  background-image: url(/images/asistencias.jpg);
+  display: flex;
+  align-items: center;
+}
+
+.inasistencias {
+  background-image: url(/images/inasistencias.jpg);
+}
+
+.periodo-nomina {
+  background-image: url(/images/nomina.jpg);
+}
+
+/* Insights */
+main .insights {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.6rem;
+  margin-top: 50px;
+  margin-left: 0;
+}
+
+main .insights > div {
+  position: relative;
+  border-radius: var(--card-border-radius);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1 / 1;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: all 0.3s ease;
+}
+
+main .insights > div:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.4);
+}
+
+main .insights .background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.6) blur(5px);
+ z-index: -1;
+}
+
+main .insights > div.empleados .background {
+ background-image: url(/images/empleados.jpg);
+}
+
+main .insights > div.asistencias .background {
+ background-image: url(/images/asistencias.jpg);
+}
+
+main .insights > div.inasistencias .background {
+ background-image: url(/images/inasistencias.jpg);
+}
+
+main .insights > div.periodo-nomina .background {
+ background-image: url(/images/nomina.jpg);
+}
+
+main .insights .content {
+ background: rgba(255, 255, 255, 0.2);
+ border-radius: 1rem;
+ padding: 1.5rem;
+ backdrop-filter: blur(5px);
+ -webkit-backdrop-filter: blur(5px);
+ border: 1px solid rgba(255, 255, 255, 0.18);
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ text-align: center;
+ width: 100%;
+ height: 110%;
+ position: relative;
+ z-index: 1;
+ transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+main .insights .content:hover {
+ transform: translateY(-5px);
+ box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+main .insights .icon {
+ background: #C21311;
+ border-radius: 50%;
+ width: 4rem;
+ height: 4rem;
+ display: grid;
+ place-items: center;
+ margin-bottom: 1rem;
+}
+
+main .insights .icon span {
+ font-size: 2rem;
+ color: var(--color-white);
+}
+
+main .insights .content h3 {
+ font-size: 1.2em;
+ font-weight: 700;
+ color: rgba(255, 255, 255, 0.9);
+ text-shadow: 0 0 10px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 0, 0, 0.2);
+ margin-bottom: 0.5rem;
+ position: relative;
+ word-wrap: break-word;
+ overflow-wrap: break-word;
+ hyphens: auto;
+}
+
+main .insights .content h3::after {
+ content: '';
+ position: absolute;
+ bottom: -5px;
+ left: 0;
+ width: 100%;
+ height: 2px;
+ background: linear-gradient(to right, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.5));
+}
+
+main .insights .content h1,
+main .insights .content h2 {
+ font-size: 1.5em;
+ color: #fff;
+ text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+ word-wrap: break-word;
+ overflow-wrap: break-word;
+ hyphens: auto;
+}
+
+
+
+/*********************************************************** Material Icons ************************************************************/
+.material-icons {
+ font-family: 'Material Icons';
+ font-weight: normal;
+ font-style: normal;
+ font-size: 24px;
+ display: inline-block;
+ line-height: 1;
+ text-transform: none;
+ letter-spacing: normal;
+ word-wrap: normal;
+ white-space: nowrap;
+ direction: ltr;
+ -webkit-font-smoothing: antialiased;
+ text-rendering: optimizeLegibility;
+ -moz-osx-font-smoothing: grayscale;
+ font-feature-settings: 'liga';
+}
+

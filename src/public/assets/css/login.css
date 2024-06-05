@@ -1,0 +1,452 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+
+/* ------------------------------------Globals--------------------------------- */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  font-size: calc(var(--font-size) * 1em);
+  z-index: 1;
+}
+
+:root {
+  --space: 1rem;
+  --font-size: 1rem;
+  --primary-color: #ff0000;
+  --secondary-color: #00ff00;
+  --first-color: #2e2e41;
+  --second-color: #5b85ff;
+  --third-color: #434354;
+  --text-color: #fff;
+  --icon-color: hsl(234, 12%, 24%);
+  --container-color: hls(234, 100%, 99%);
+  --box-shadow: 0 5px 25px rgb(2, 2, 2, 0.1);
+  --text-shadow: 0 5px 25px rgb(2, 2, 2, 0.1);
+}
+
+a {
+  text-decoration: none;
+}
+
+/* ------------------------------------ Body -------------------------------- */
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  flex-direction: column;
+  position: relative;
+}
+
+body::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url(/images/Constructionv3.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center top;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+body.signup::after {
+  opacity: 1;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url(/images/Construction.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+/* -------------------------------------- Container ------------------------------*/
+
+.container {
+  position: relative;
+  width: 80%;
+}
+
+/* -------------------------------------- Logo Container ------------------------ */
+
+.logo-container {
+  position: relative;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10rem;
+}
+
+.logo-container img {
+  max-width: 80%;
+  height: auto;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* ------------------------------------- Login Container ------------------------- */
+
+.login-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 400px;
+  border-radius: 0.94rem;
+  box-shadow: 0 0.3vw 1.5625vw rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  transition: transform 0.3s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out;
+  overflow: hidden;
+  text-align: center;
+  margin: 0 auto;
+  padding: 120px 10px;
+  transform: translateY(-4rem);
+}
+
+.login-container::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: repeating-conic-gradient(from var(--a), #ff0000 0%, #ff0000 10%, transparent 10%, transparent 80%, #ff0000 100%);
+  border-radius: 5%;
+  animation: animate 2.5s linear infinite;
+}
+
+.login-container span {
+  position: absolute;
+  inset: 0.3125rem;
+  overflow: hidden;
+  border-radius: 0.938rem;
+}
+
+.login-container span::before {
+  content: '';
+  position: absolute;
+  inset: 0.313rem;
+  background: url(/images/Construction.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  filter: blur(0.625rem);
+}
+
+.login-container span::after {
+  content: '';
+  position: absolute;
+  inset: 0.3125rem;
+  background: url(/images/Construction.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  filter: blur(1rem);
+}
+
+/* --------------------------------- Animation 360º --------------------------- */
+
+@property --a {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes animate {
+  0% {
+    --a: 0deg;
+  }
+  100% {
+    --a: 360deg;
+  }
+}
+
+/* --------------------------------- Login container signup form -------------------- */
+
+body.signup .login-container {
+  transition: 0.5s;
+  width: 400px;
+  height: 400px;
+}
+
+body.signup .login-container span::before,
+body.signup .login-container span::after {
+  background: url(/images/Constructionv3.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  filter: blur(1.5rem);
+}
+
+/* ---------------------------------- Forms --------------------------- */
+
+form {
+  position: absolute;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.938rem;
+  transition: left 0.5s;
+}
+
+form#signupForm {
+  left: 100%;
+  position: relative;
+}
+
+body.signup form#signinForm {
+  left: -100%;
+}
+
+body.signup form#signupForm {
+  left: 0;
+}
+
+form h2 {
+  position: relative;
+  color: #000000;
+  font-size: 1.5rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+form a{
+  text-transform: uppercase;
+}
+
+form .inputBox {
+  position: relative;
+  width: 90%;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+form .inputBox a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+form .inputBox a:nth-child(2) {
+  text-decoration: underline;
+}
+
+form .inputBox input {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  outline: none;
+  border: 0.063rem solid rgba(255, 255, 255, 0.25);
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+  color: #fff;
+}
+
+form .inputBox input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+form .inputBox input[type="submit"] {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-weight: 500;
+  padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+form .inputBox input[type="submit"]:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+form .inputBox input[type="submit"]::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  opacity: 0;
+  transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+}
+
+form .inputBox input[type="submit"]:active::before {
+  width: 200px;
+  height: 200px;
+  opacity: 1;
+}
+
+/* =============== Sign up form ================ */
+
+#signupForm form .inputBox input[type="submit"] {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-weight: 500;
+  padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  transform: translateY(1rem);
+}
+
+#signupForm form .inputBox input[type="submit"]:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+#signupForm form .inputBox input[type="submit"]::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  opacity: 0;
+  transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+}
+
+#signupForm form .inputBox input[type="submit"]:active::before {
+  width: 200px;
+  height: 200px;
+  opacity: 1;
+}
+
+form#signupForm h2 {
+  transform: translateY(-0.5rem);
+}
+
+form#signupForm .inputBox {
+  margin-bottom: 10px;
+}
+
+form#signupForm .inputBox input {
+  margin-bottom: -1rem;
+}
+
+
+
+
+/* ------------ Back button ---------------- */
+
+form#signupForm .icono-regresar-container {
+  position: absolute;
+  transform: translateY(0.1rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+form#signupForm .icono-regresar-clickable {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+  position: relative;
+}
+
+form#signupForm .icono-regresar-clickable::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+form#signupForm .icono-regresar-clickable:hover {
+  transform: scale(1.1);
+}
+
+form#signupForm .icono-regresar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: var(--text-color);
+  position: relative;
+  z-index: 2;
+}
+
+
+
+/* =============================== Media Queries tablets =========================== */
+
+@media screen and (max-width: 1024px) {
+  .login-container {
+    max-width: 400px;
+    padding: 120px 5px;
+    transform: translateY(-10px);
+  }
+
+  .floating_container {
+    left: -30px;
+  }
+
+  form#signupForm .floating_container {
+    left: 0;
+  }
+}
+
+/* ------------------------------------- Mobile Devices Media Queries ------------------------------ */
+
+@media screen and (max-width: 768px) {
+  .login-container {
+    max-width: 300px;
+    padding: 120px 10px;
+    transform: translateY(-5px);
+  }
+
+  form#signupForm h2 {
+    font-size: 1.2rem;
+  }
+
+  form#signupForm .inputBox {
+    width: 90%;
+  }
+
+  form#signupForm .inputBox input[type="submit"] {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}

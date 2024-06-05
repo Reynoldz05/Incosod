@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Control de INCOSOD</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="/css/nomina.css">
+    
+
+    
+</head>
+<body>
+    <div class="container">
+
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <img src="/images/logo.png" alt="Logotipo">
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons">close</span>
+                </div>
+            </div>
+            <nav class="sidebar">
+                <a href="/index">
+                    <span class="material-icons">grid_view</span>
+                    <h3>Inicio</h3>
+                </a>
+                <a href="/mostrar">
+                    <span class="material-icons">person</span>
+                    <h3>Empleados</h3>
+                </a>
+                <div class="sidebar-item">
+                    <a href="#" class="sidebar-link" onclick="toggleDropdown(event)">
+                      <span class="material-icons">assignment_ind</span>
+                      <h3>Asistencias</h3>
+                      <span class="dropdown-icon material-icons">arrow_drop_down</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="/asistencias-proyectos" class="dropdown-item nav-link">
+                        <span class="material-icons">assignment</span>
+                        <span>Registrar</span>
+                      </a>
+                      <a href="/mostrarAsistencias" class="dropdown-item nav-link">
+                        <span class="material-icons">search</span>
+                        <span>Consultar</span>
+                      </a>
+                    </div>
+                  </div>
+                <a href="/proyectos" id="proyectos">
+                    <span class="material-icons">create</span>
+                    <h3>Proyectos</h3>
+                </a>
+                <a href="/nomina">
+                    <span class="material-icons">payments</span>
+                    <h3>Nómina</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons">text_snippet</span>
+                    <h3>Bitácora</h3>
+                </a>
+                <a href="/registrar-usuarios" id="usuarios">
+                    <span class="material-icons">group</span>
+                    <h3>Usuarios</h3>
+                </a>
+                <a href="/logout">
+                    <span class="material-icons">logout</span>
+                    <h3>Cerrar Sesión</h3>
+                </a>
+            </nav>
+        </aside>
+        <!--------------------------------------------------- FIN DEL ASIDE ------------------------------------------------------>
+        <main>
+            <h1>Nómina</h1>
+            <div class="nomina-info">
+                <div class="puesto">
+                    <h3>Puesto:</h3>
+                    <div class="select-wrapper">
+                        <select id="puesto-select">
+                            <option value=""></option>
+                            <option value="albañil">Albañil</option>
+                            <option value="maestro">Maestro</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div id="contenedor-empleados" class="cantidad-empleados">
+                    <h3>Cantidad de empleados:</h3>
+                    <p id="cantidad-empleados-number">2</p>
+                </div>
+                <div id="contenedor-sueldo" class="sueldo-general">
+                    <h3>Sueldo general:</h3>
+                    <div class="sueldo-input">
+                        <span>$</span>
+                        <input type="number" id="sueldo-input" min="100" oninput="validarValor(this)">
+                        <span id="btn-edit" class="material-icons">edit</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-----------------Creación de las tarjetas------------------------------------>
+            <div class="empleados-cards">
+                <div id="card-albanil" class="empleado-card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="empleado-info empleado-nombre">
+                                <p><strong>Juan Perez</strong></p>
+                            </div>
+                            <div class="empleado-info empleado-foto">
+                                <img src="/images/ine_Juan.jpg" alt="INE de Juan Perez">
+                            </div>
+                            <div class="empleado-info">
+                                <h4>Sueldo:</h4>
+                                <p>$5,000</p>
+                            </div>
+                            <div class="empleado-info">
+                                <h4>Horas Extra:</h4>
+                                <h3>5</h3>
+                                <div class="input-container">
+                                    <span class="symbol">$</span>
+                                    <input type="number" class="input-sombra horas-extra" min="0">
+                                </div>
+                            </div>
+                            <div class="empleado-info">
+                                <h4>Infonavit:</h4>
+                                <div class="input-container">
+                                    <input type="number" class="input-sombra infonavit" min="0">
+                                    <span class="symbol">%</span>
+                                </div>
+                            </div>
+                            <div class="empleado-total">
+                                <h4>Total:</h4>
+                                <span id="save-icon" class="material-icons">save</span>
+                                <span id="loan-icon" class="material-icons">savings</span>
+                                <div class="total-container">
+                                    <p>$5,000</p>
+                                    <span id="download-icon" class="material-icons">download</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="file-icons">
+                                <span class="material-icons" title="Exportar en PDF" id="pdf-icon">picture_as_pdf</span>
+                                <span class="fas fa-file-excel" title="Exportar en Excel" id="excel-icon"></span>
+                            </div>
+                            <span class="material-icons btn-flip">arrow_back</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="card-albanil2" class="empleado-card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="empleado-info empleado-nombre">
+                                <p><strong>Juanita Saravia</strong></p>
+                            </div>
+                            <div class="empleado-info empleado-foto">
+                                <img src="/images/ine_juanita.jpg" alt="INE de Juanita Saravia">
+                            </div>
+                            <div class="empleado-info">
+                                <h4>Sueldo:</h4>
+                                <p>$6,000</p>
+                            </div>
+                            <div class="empleado-info">
+                                <h4>Horas Extra:</h4>
+                                <h3>10</h3>
+                                <div class="input-container">
+                                    <span class="symbol">$</span>
+                                    <input type="number" class="input-sombra horas-extra" min="0">
+                                </div>
+                            </div>
+                            <div class="empleado-info">
+                                <h4>Infonavit:</h4>
+                                <div class="input-container">
+                                    <input type="number" class="input-sombra infonavit" min="0">
+                                    <span class="symbol">%</span>
+                                </div>
+                            </div>
+                            <div class="empleado-total">
+                                <h4>Total:</h4>
+                                <span id="save-icon" class="material-icons">save</span>
+                                <span id="loan-icon" class="material-icons">savings</span>
+                                <div class="total-container">
+                                    <p>$6,000</p>
+                                    <span id="download-icon" class="material-icons">download</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="file-icons">
+                                <span class="material-icons" title="Exportar en PDF" id="pdf-icon">picture_as_pdf</span>
+                                <span class="fas fa-file-excel" title="Exportar en Excel" id="excel-icon"></span>
+                            </div>
+                            <span class="material-icons btn-flip">arrow_back</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="card-maestro" class="empleado-card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="empleado-info empleado-nombre">
+                                <p><strong>Pedro Pascual</strong></p>
+                            </div>
+                            <div class="empleado-info empleado-foto">
+                                <img src="/images/ine_pascual.jpg" alt="INE de Juan Perez">
+                            </div>
+                            <div class="empleado-info">
+                                <h4>Sueldo:</h4>
+                                <p>$7,000</p>
+                            </div>
+                            <div class="empleado-info">
+                                <h4>Horas Extra:</h4>
+                                <h3>7</h3>
+                                <div class="input-container">
+                                    <span class="symbol">$</span>
+                                    <input type="number" class="input-sombra horas-extra" min="0">
+                                </div>
+                            </div>
+                            <div class="empleado-info">
+                                <h4>Infonavit:</h4>
+                                <div class="input-container">
+                                    <input type="number" class="input-sombra infonavit" min="0">
+                                    <span class="symbol">%</span>
+                                </div>
+                            </div>
+                            <div class="empleado-total">
+                                <h4>Total:</h4>
+                                <span id="save-icon" class="material-icons">save</span>
+                                <span id="loan-icon" class="material-icons">savings</span>
+                                <div class="total-container">
+                                    <p>$7,000</p>
+                                    <span id="download-icon" class="material-icons">download</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="file-icons">
+                                <span class="material-icons" title="Exportar en PDF" id="pdf-icon">picture_as_pdf</span>
+                                <span class="fas fa-file-excel" title="Exportar en Excel" id="excel-icon"></span>
+                            </div>
+                            <span class="material-icons btn-flip">arrow_back</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+                <!--------------------Fin de la seccion del main-->
+
+
+
+
+                <!----------------------------Pantalla modal de Prestamos-------------------------->
+                <div id="loanModal" class="modal">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h2>Préstamo</h2>
+                        <span class="close" id="closeModal">&times;</span>
+                      </div>
+                      <label for="loanAmount">Cantidad a prestar:</label>
+                      <input type="number" id="loanAmount" min="0">
+                      <p>Subtotal: <span id="loanSubtotal">0</span></p>
+                      <button id="confirmLoan">Confirmar</button>
+                    </div>
+                  </div>
+                
+      
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="/js/nomina.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>

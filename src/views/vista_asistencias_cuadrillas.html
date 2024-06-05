@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar Asistencias</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/css/vista_asistencias_cuadrillas.css">
+</head>
+<body>
+    <div class="container">
+
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <img src="/images/logo.png" alt="Logotipo">
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons">close</span>
+                </div>
+            </div>
+            <nav class="sidebar">
+                <a href="/index">
+                    <span class="material-icons">grid_view</span>
+                    <h3>Inicio</h3>
+                </a>
+                <a href="/mostrar">
+                    <span class="material-icons">person</span>
+                    <h3>Empleados</h3>
+                </a>
+                <div class="sidebar-item">
+                    <a href="#" class="sidebar-link" onclick="toggleDropdown(event)">
+                      <span class="material-icons">assignment_ind</span>
+                      <h3>Asistencias</h3>
+                      <span class="dropdown-icon material-icons">arrow_drop_down</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="/asistencias-proyectos" class="dropdown-item nav-link">
+                        <span class="material-icons">assignment</span>
+                        <span>Registrar</span>
+                      </a>
+                      <a href="/mostrarAsistencias" class="dropdown-item nav-link">
+                        <span class="material-icons">search</span>
+                        <span>Consultar</span>
+                      </a>
+                    </div>
+                  </div>
+                <a href="/proyectos" id="proyectos">
+                    <span class="material-icons">create</span>
+                    <h3>Proyectos</h3>
+                </a>
+                <a href="/nomina">
+                    <span class="material-icons">payments</span>
+                    <h3>Nómina</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons">text_snippet</span>
+                    <h3>Bitácora</h3>
+                </a>
+                <a href="/registrar-usuarios" id="usuarios">
+                    <span class="material-icons">group</span>
+                    <h3>Usuarios</h3>
+                </a>
+                <a href="/logout">
+                    <span class="material-icons">logout</span>
+                    <h3>Cerrar Sesión</h3>
+                </a>
+            </nav>
+        </aside>
+        <!--------------------------------------------------- FIN DEL ASIDE ------------------------------------------------------>
+        <main>
+            <h1>Consultar Asistencias</h1>
+            <div class="date-picker-container" id="datePickerContainer">
+                <div class="date" id="dateContainer">
+                    <label for="fechaActual">
+                        <span id="fechaSeleccionada"></span>
+                        <span class="material-icons">event</span>
+                        <input type="date" id="fechaActual">
+                    </label>
+                </div>
+            </div>
+            <!-- Listas desplegables de proyectos y cuadrillas -->
+            <div class="seleccion">
+                {%if idUser%}
+                <select id="proyectos-select" data-id="{{idUser}}">
+                    <option value="">Seleccione un proyecto</option>
+                </select>
+                {%else%}
+                <select id="proyectos-select">
+                    <option value="">Seleccione un proyecto</option>
+                </select>
+                {% endif %}
+                <select id="cuadrillas-select" disabled>
+                    <option value="">Seleccione una cuadrilla</option>
+                </select>
+                <button id="btn-aceptar" disabled>Aceptar</button>
+            </div>
+
+             <!--------------Campo de fecha-------------------->
+             
+            
+            <!-- Tabla de asistencias -->
+            <div class="table-container">
+                <table id="tabla-asistencias">
+                    <thead>
+                        <tr>
+                            <th>Fecha de Asistencia</th>
+                            <th>Hora de Inicio de Jornada</th>
+                            <th>Hora de Fin de Jornada</th>
+                            <th>Total de Asistencias</th>
+                            <th>Total de Inasistencias</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Aquí se insertarán las filas de asistencias dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+    </main>
+                <!--------------------Fin de la seccion del main-->
+
+        
+                <!-------------------Notificación en la parte de abajo------->
+                <div id="notification-bar"></div>
+
+
+                
+ 
+
+    </div>
+
+    <script src="/js/vista_asistencias_cuadrillas.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+</html>

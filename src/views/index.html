@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Panel de Control</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <div class="container">
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <img src="/images/logo.png" alt="Logotipo">
+                </div>
+            </div>
+            <nav class="sidebar">
+                <a href="/index">
+                    <span class="material-icons">grid_view</span>
+                    <h3>Inicio</h3>
+                </a>
+                <a href="/mostrar">
+                    <span class="material-icons">person</span>
+                    <h3>Empleados</h3>
+                </a>
+                <div class="sidebar-item">
+                    <a href="#" class="sidebar-link" onclick="toggleDropdown(event)">
+                      <span class="material-icons">assignment_ind</span>
+                      <h3>Asistencias</h3>
+                      <span class="dropdown-icon material-icons">arrow_drop_down</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="/asistencias-proyectos" class="dropdown-item nav-link">
+                        <span class="material-icons">assignment</span>
+                        <span>Registrar</span>
+                      </a>
+                      <a href="/mostrarAsistencias" class="dropdown-item nav-link">
+                        <span class="material-icons">search</span>
+                        <span>Consultar</span>
+                      </a>
+                    </div>
+                  </div>
+                <a href="/proyectos" id="proyectos">
+                    <span class="material-icons">create</span>
+                    <h3>Proyectos</h3>
+                </a>
+                <a href="/nomina">
+                    <span class="material-icons">payments</span>
+                    <h3>Nómina</h3>
+                </a>
+                <a href="/bitacora">
+                    <span class="material-icons">text_snippet</span>
+                    <h3>Bitácora</h3>
+                </a>
+                <a href="/registrar-usuarios" id="usuarios">
+                    <span class="material-icons">group</span>
+                    <h3>Usuarios</h3>
+                </a>
+                <a href="/logout">
+                    <span class="material-icons">logout</span>
+                    <h3>Cerrar Sesión</h3>
+                </a>
+            </nav>
+        </aside>
+        <main>
+            <h1><span class="colored-panel">Panel</span> de Control</h1>
+            <div class="date-picker-container" id="datePickerContainer">
+                <div class="date" id="dateContainer">
+                    <label for="fechaActual">
+                        <span id="fechaSeleccionada"></span>
+                        <span class="material-icons">event</span>
+                        <input type="date" id="fechaActual">
+                    </label>
+                </div>
+            </div>
+            <div class="insights">
+                <div class="empleados">
+                    <div class="background"></div>
+                    <div class="content">
+                        <div class="icon">
+                            <span class="material-icons">people</span>
+                        </div>
+                        <h3>Empleados Totales</h3>
+                        <h1>5</h1>
+                    </div>
+                </div>
+                <div class="asistencias">
+                    <div class="background"></div>
+                    <div class="content">
+                        <div class="icon">
+                            <span class="material-icons">how_to_reg</span>
+                        </div>
+                        <h3>Asistencias de Hoy</h3>
+                        <h1>10</h1>
+                    </div>
+                </div>
+                <div class="inasistencias">
+                    <div class="background"></div>
+                    <div class="content">
+                        <div class="icon">
+                            <span class="material-icons">person_off</span>
+                        </div>
+                        <h3>Inasistencias de Hoy</h3>
+                        <h1>3</h1>
+                    </div>
+                </div>
+                <div class="periodo-nomina">
+                    <div class="background"></div>
+                    <div class="content">
+                        <div class="icon">
+                            <span class="material-icons">payments</span>
+                        </div>
+                        <h3>Periodo de Nómina</h3>
+                        <h2>15-21 de Enero de 2024</h2>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="js/index.js"></script>
+</body>
+</html>

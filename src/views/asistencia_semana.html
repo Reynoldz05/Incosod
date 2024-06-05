@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Control de INCOSOD</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/css/asistencia_semana.css">
+</head>
+<body>
+    <div class="container">
+
+        <aside>
+            <div class="top">
+                <!--Aqui se coloca el logo de la empresa-->
+                <div class="logo">
+                    <img src="/images/logo.png" alt="Logotipo">
+                    <h2><span class="color-in">IN</span>COSOD</h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons">
+                        close
+                        </span>
+                </div>
+            </div>
+            <!--Aqui se define el sidebar que contendra los apartados a donde el usuario podra navegar dentro del sistema-->
+            <div class="sidebar">
+
+                <a href="#" id="panel-control">
+                    <span class="material-icons">grid_view</span>
+                    <h3>Panel de Control</h3>
+                </a>
+                <a href="#" id="p-empleados">
+                    <span class="material-icons">person</span>
+                    <h3>Empleados</h3>
+                </a>
+                <a href="#" id="asistencias">
+                    <span class="material-icons">assignment_ind</span>
+                    <h3>Asistencias</h3>
+                </a>
+                <div class="submenu" id="submenu">
+                    <a id="registro-asistencia"> Registrar Asistencia</a>
+                    <a id="consulta-asistencia"> Consultar Asistencia</a>
+                </div>
+
+                <a href="#" id="proyectos">
+                    <span class="material-icons">create</span>
+                    <h3>Proyectos</h3>
+                </a>
+
+                <a href="#">
+                    <span class="material-icons">payments</span>
+                    <h3>Nómina</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons">text_snippet</span>
+                    <h3>Bitácora</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons">logout</span>
+                    <h3>Cerrar Sesión</h3>
+                </a>
+            </div>
+
+        </aside>
+        <!--------------------------------------------------- FIN DEL ASIDE ------------------------------------------------------>
+        <main>
+            <h1>Asistencia por Semana</h1>
+            <form class="form-asistencia-semanal">
+                <div class="table-container">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Lunes</th>  
+                        <th>Martes</th>
+                        <th>Miércoles</th>
+                        <th>Jueves</th>
+                        <th>Viernes</th>
+                        <th>Sábado</th>
+                    </tr>
+                    </thead>
+                    
+                    <tbody>
+                        {% for empleado in empleados %}
+                        <tr class="employees">
+                            <td>{{empleado.nombre}} {{empleado.apellido_paterno}} {{empleado.apellido_materno}}</td>
+                            <td>
+                                <label>
+                                    <input type="radio" class="radio-btn check check-asistencia"  id="radio-lunes-{{empleado.id}}" value="1" data-id="{{empleado.id}}" data-dia="lunes">
+                                </label>
+                            </td>
+                            <td>
+                                <label>
+                                    <input type="radio" class="radio-btn check check-asistencia"  id="radio-martes-{{empleado.id}}" value="1" data-id="{{empleado.id}}" data-dia="martes">
+                                </label>
+                            </td>
+                            <td>
+                                <label>
+                                    <input type="radio" class="radio-btn check check-asistencia"  id="radio-miercoles-{{empleado.id}}" value="1" data-id="{{empleado.id}}" data-dia="miercoles">
+                                </label>
+                            </td>
+                            <td>
+                                <label>
+                                    <input type="radio" class="radio-btn check check-asistencia"  id="radio-jueves-{{empleado.id}}" value="1" data-id="{{empleado.id}}" data-dia="jueves">
+                                </label>
+                            </td>
+                            <td>
+                                <label>
+                                    <input type="radio" class="radio-btn check check-asistencia"  id="radio-viernes-{{empleado.id}}" value="1" data-id="{{empleado.id}}" data-dia="viernes">
+                                </label>
+                            </td>
+                            <td>
+                                <label>
+                                    <input type="radio" class="radio-btn check check-asistencia"  id="radio-sabado-{{empleado.id}}" value="1" data-id="{{empleado.id}}" data-dia="sabado">
+                                </label>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                </div>
+
+                <div style="text-align: right;">
+                    <button type="submit" class="btn btn-guardar">Guardar</button>  
+                </div>
+            </form>
+
+            {% for asistencia in asistencias %}
+            <button data-id="{{asistencia.id}}" class="btn btn-terminar">Terminar Semana</button>
+            {% endfor %}
+
+              <!-- Aquí es donde aparecerán los botones de paginación -->
+              <div id="pagination"></div>
+        </main>
+                <!--------------------Fin de la seccion del main-->
+
+             <!-- Ventana Modal Justificación -->
+             <div id="modal3" class="modal">
+
+                <div class="modal-content centered">
+                    <h2>Falta Justificada / No Justificada</h2>
+
+
+                    <div class="checks">
+                      <div class="empleado">
+                        <div class="nombres">
+                            <input type="checkbox" id="justificada" name="justificada">
+                            <label for="justificada">Justificada</label>
+                        </div>
+                      </div>
+
+                      <div class="empleado">
+                        <div class="nombres">
+                            <input type="checkbox" id="no-justificada" name="no-justificada">
+                            <label for="no-justificada">No Justificada</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                        <label for="descripcion">Descripción:</label>
+                        <textarea id="descripcion" rows="8" placeholder="Agregar una descripcion a la justificación"></textarea>
+                    
+                    </div>
+
+                    <div class="acciones">
+
+                        <div>
+                            <input type="file" id="file-input" accept="image/*" style="display: none;">
+                            <span id="adjuntar" class="material-icons">attach_file</span>
+                            <span>Adjuntar Evidencia</span>
+                        </div>
+                      
+                        <button id="terminar">Terminar</button>
+                        
+                      
+                      </div>
+            
+                </div>
+            
+            </div>
+
+
+              <!-- Ventana Modal Justificación -->
+              <div id="modal" class="modal">
+
+                <div class="modal-content">
+                    <h2>¿Quién tuvo horas extra?</h2>
+                    <table>
+
+                        <thead>
+                          <tr>
+                            <th>Nombre</th>
+                            <th>Lunes</th>
+                            <th>Martes</th>>
+                            <th>Miércoles</th>
+                            <th>Jueves</th>
+                            <th>Viernes</th>
+                            <th>Sábado</th>
+                          </tr>
+                        </thead>
+                      
+                        <tbody>
+                        {% for empleadoAsistido in empleadosAsistidos %}   
+                          <tr class="tr-hrs">
+                            <td>
+                                <input type="checkbox" id="check_{{empleadoAsistido.id}}" class="check-hrs">
+                                <label for="check_{{empleadoAsistido.id}}">{{empleadoAsistido.nombre}} {{empleadoAsistido.apellido_paterno}} {{empleadoAsistido.apellido_materno}}</label>
+                            </td>
+                            
+                            <td>  
+                              <input data-asistencia="{{empleadoAsistido.lunes}}" data-entrada="{{empleadoAsistido.entrada_lunes}}" name="{{empleadoAsistido.id}}" data-dia="lunes" type="number" min="0" max="5">
+                            </td>
+                            <td>  
+                                <input data-asistencia="{{empleadoAsistido.martes}}" data-entrada="{{empleadoAsistido.entrada_martes}}" name="{{empleadoAsistido.id}}" data-dia="martes" type="number" min="0" max="5">
+                            </td>
+                            <td>  
+                                <input data-asistencia="{{empleadoAsistido.miercoles}}" data-entrada="{{empleadoAsistido.entrada_miercoles}}" name="{{empleadoAsistido.id}}" data-dia="miercoles" type="number" min="0" max="5">
+                            </td>
+                            <td>  
+                                <input data-asistencia="{{empleadoAsistido.jueves}}" data-entrada="{{empleadoAsistido.entrada_jueves}}" name="{{empleadoAsistido.id}}" data-dia="jueves" type="number" min="0" max="5">
+                            </td>
+                            <td>  
+                                <input data-asistencia="{{empleadoAsistido.viernes}}" data-entrada="{{empleadoAsistido.entrada_viernes}}" name="{{empleadoAsistido.id}}" data-dia="viernes" type="number" min="0" max="5">
+                            </td>
+                            <td>  
+                                <input data-asistencia="{{empleadoAsistido.sabado}}" data-entrada="{{empleadoAsistido.entrada_sabado}}" name="{{empleadoAsistido.id}}" data-dia="sabado" type="number" min="0" max="5">
+                            </td>
+                            
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      
+                      </table>
+                      {% for asistencia in asistencias %}
+                      <button data-id="{{asistencia.id}}" id="btn-extra">Terminar</button>
+                      {% endfor %}
+                      <div id="paginationModalHoras"></div>
+                </div>
+            
+            </div>
+
+
+            
+              <!-- Ventana Modal al Guardar -->
+              <div id="modal2" class="modal">
+
+                <div class="modal-content centered">
+                    <h2>Seleccione los empleados que llegaron tarde</h2>
+
+
+                    <table>
+
+                        <thead>
+                          <tr>
+                            <th>Nombre</th>
+                            <th>Lunes</th>
+                            <th>Martes</th>
+                            <th>Miércoles</th>
+                            <th>Jueves</th>
+                            <th>Viernes</th>
+                            <th>Sábado</th>
+                          </tr>
+                        </thead>
+
+
+                        <tbody>
+                            {% for empleado in empleados %}
+                            <tr class="empleado-horas">
+                                <td>
+                                    <div class="nombres">
+                                        <input type="checkbox" id="empleado{{empleado.id}}" name="empleado{{empleado.id}}" onchange="toggleInput('empleado{{empleado.id}}','hora-{{empleado.id}}-lunes','hora-{{empleado.id}}-martes','hora-{{empleado.id}}-miercoles','hora-{{empleado.id}}-jueves','hora-{{empleado.id}}-viernes','hora-{{empleado.id}}-sabado')">
+                                        <label for="empleado{{empleado.id}}">{{empleado.nombre}} {{empleado.apellido_paterno}} {{empleado.apellido_materno}}</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="horas">
+                                        <input type="time" class="input-time" id="hora-{{empleado.id}}-lunes" name="{{empleado.id}}-lunes" data-name="{{empleado.id}}" data-dia="lunes" placeholder="00:00">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="horas">
+                                        <input type="time" class="input-time" id="hora-{{empleado.id}}-martes" name="{{empleado.id}}-martes" data-name="{{empleado.id}}" data-dia="martes" placeholder="00:00">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="horas">
+                                        <input type="time" class="input-time" id="hora-{{empleado.id}}-miercoles" name="{{empleado.id}}-miercoles" data-name="{{empleado.id}}" data-dia="miercoles"  placeholder="00:00">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="horas">
+                                        <input type="time" class="input-time" id="hora-{{empleado.id}}-jueves" name="{{empleado.id}}-jueves" data-name="{{empleado.id}}" data-dia="jueves" placeholder="00:00">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="horas">
+                                        <input type="time" class="input-time" id="hora-{{empleado.id}}-viernes" name="{{empleado.id}}-viernes" data-name="{{empleado.id}}" data-dia="viernes" placeholder="00:00">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="horas">
+                                        <input type="time" class="input-time" id="hora-{{empleado.id}}-sabado" name="{{empleado.id}}-sabado" data-name="{{empleado.id}}" data-dia="sabado" placeholder="00:00">
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                        {% endfor %}
+                        </tbody>
+
+                    </table>
+                      
+                    <button id="confirmar">Confirmar</button>
+                    <div id="paginationModalHorarios"></div>
+            
+                </div>
+            
+            </div>
+
+                <!-------------------Notificación en la parte de abajo------->
+                <div id="notification-bar"></div>
+
+
+                <!-------------------Inicio de la seccion del menu de la parte superior -------------------------------------------- -->
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-icons">menu</span>
+                </button>
+
+                <div class="theme-toggler">
+                    <span class="material-icons active">light_mode</span>
+                    <span class="material-icons">dark_mode</span>
+                </div>
+
+                <div class="profile">
+                    <div class="info">
+                        <small class="text-muted">Admin</small>
+                    </div>
+
+                    <div class="profile-photo">
+                        <img src="/images/profile-1.jpg" alt="foto de perfil">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="/js/asistencia_semana.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+</body>
+
+</html>

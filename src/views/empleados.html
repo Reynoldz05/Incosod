@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Empleados</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/empleados.css">
+</head>
+<body>
+    <div class="container">
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <img src="/images/logo.png" alt="Logotipo">
+                </div>
+            </div>
+            <nav class="sidebar">
+                <a href="/index">
+                    <span class="material-icons">grid_view</span>
+                    <h3>Inicio</h3>
+                </a>
+                <a href="/mostrar">
+                    <span class="material-icons">person</span>
+                    <h3>Empleados</h3>
+                </a>
+                <div class="sidebar-item">
+                    <a href="#" class="sidebar-link" onclick="toggleDropdown(event)">
+                      <span class="material-icons">assignment_ind</span>
+                      <h3>Asistencias</h3>
+                      <span class="dropdown-icon material-icons">arrow_drop_down</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="/asistencias-proyectos" class="dropdown-item nav-link">
+                        <span class="material-icons">assignment</span>
+                        <span>Registrar</span>
+                      </a>
+                      <a href="/mostrarAsistencias" class="dropdown-item nav-link">
+                        <span class="material-icons">search</span>
+                        <span>Consultar</span>
+                      </a>
+                    </div>
+                  </div>
+                <a href="/proyectos" id="proyectos">
+                    <span class="material-icons">create</span>
+                    <h3>Proyectos</h3>
+                </a>
+                <a href="/nomina">
+                    <span class="material-icons">payments</span>
+                    <h3>Nómina</h3>
+                </a>
+                <a href="/bitacora">
+                    <span class="material-icons">text_snippet</span>
+                    <h3>Bitácora</h3>
+                </a>
+                <a href="/registrar-usuarios" id="usuarios">
+                    <span class="material-icons">group</span>
+                    <h3>Usuarios</h3>
+                </a>
+                <a href="/logout">
+                    <span class="material-icons">logout</span>
+                    <h3>Cerrar Sesión</h3>
+                </a>
+            </nav>
+        </aside>
+
+
+            <main>
+                <div class="tabs">
+                    <button id="tab-empleados" class="tab-button active">Empleados</button>
+                    <button id="tab-puestos" class="tab-button">Puestos</button>
+                </div>
+
+                <div class="tab-content">
+                    <div class="tab-pane active">
+                        <div class="header-container">
+                            <h1><span class="colored-panel">Emp</span>leados</h1>
+                            <div class="empleados-search-container">
+                                <input type="text" id="searchInput" placeholder="Buscar por nombre..." class="search-input">
+                                <button class="search-icon">
+                                  <i class="material-icons">search</i>
+                                  <span class="arrow-icon material-icons">arrow_drop_down</span>
+                                </button>
+                              </div>
+                            <div class="add-employee-container">
+                                <button id="btnAgregar" class="btn-add">+ Agregar Empleado</button>
+                            </div>
+                        </div>
+                        <div class="table-container">
+                          <table>
+                            <thead>
+                              <tr>
+                                <th>NOMBRE</th>
+                                <th>TELEFONO</th>
+                                <th>PUESTO</th>
+                                <th>NSS</th>
+                                <th>INFONAVIT</th>
+                                <th>SALARIO</th>
+                                <th>FECHA DE INGRESO</th>
+                                <th colspan="2">ACCIONES</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for empleado in empleados %}
+                                <tr>
+                                    <td>
+                                        <div class="nombre-container">
+                                          {{empleado.nombre}} {{empleado.apellido_paterno}} {{empleado.apellido_materno}}
+                                          <img id="logo" data-id="{{empleado.id}}" src="/images/logo_credencial.jpeg">
+                                        </div>
+                                      </td>
+                                  <td>{{empleado.telefono}}</td>
+                                  <td>{{empleado.puesto}}</td>
+                                  <td>{{empleado.nss}}</td>
+                                  <td>{{empleado.infonavit}}</td>
+                                  <td>${{empleado.salario}}</td>
+                                  <td>{{empleado.fecha_ingreso}}</td>
+                                  <td>
+                                    <button class="btn-edit" data-id="{{empleado.id}}"><span class="material-icons">edit</span></button>
+                                  </td>
+                                  <td>
+                                    <button class="btn-delete" data-id="{{empleado.id}}"><span class="material-icons">delete</span></button>
+                                  </td>
+                                </tr>
+                              {% endfor %}
+                            </tbody>
+                          </table>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane">
+                        <div class="header-container">
+                            <h1><span class="colored-panel">Pue</span>stos</h1>
+                            <div class="puestos-search-container">
+                                <input type="text" id="searchInputPuestos" placeholder="Buscar por nombre..." class="search-input">
+                                <button class="search-icon">
+                                  <i class="material-icons">search</i>
+                                  <span class="arrow-icon material-icons">arrow_drop_down</span>
+                                </button>
+                              </div>
+                            <div class="add-puesto-container">
+                                <button class="btn-add-puesto">+ Agregar Puesto</button>
+                            </div>
+                        </div>
+                        <div class="table-container">
+                            <table id="tabla-puestos">
+                                <thead>
+                                    <tr>
+                                        <th>Puesto</th>
+                                        <th>Sueldo</th>
+                                        <th>Fecha Agregado</th>
+                                        <th colspan="2">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Las filas de puestos se agregarán aquí -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Ventanas Modal -->
+            <div id="modal-crear-puesto" class="modal">
+                <div class="modal-content">
+                    <h2>Crear Puesto</h2>
+                    <form id="form-crear-puesto">
+                        <div class="form-group">
+                            <label for="puesto">Puesto:</label>
+                            <input type="text" id="puesto" name="puesto" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sueldo">Sueldo:</label>
+                            <input type="number" id="sueldo" name="sueldo" step="0.01" min="0" required>
+                        </div>
+                        <button type="submit" id="btn-guardar-puesto" disabled>Guardar</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="modal-editar-puesto" class="modal">
+                <div class="modal-content">
+                    <h2>Editar Puesto</h2>
+                    <form id="form-editar-puesto">
+                        <div class="form-group">
+                            <label for="puesto-editar">Puesto:</label>
+                            <input type="text" id="puesto-editar" name="puesto" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sueldo-editar">Sueldo:</label>
+                            <input type="number" id="sueldo-editar" name="sueldo" step="0.01" min="0" required>
+                        </div>
+                        <button type="submit" id="btn-modificar-puesto">Modificar</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="modal-fotografia" class="modal">
+                <div class="modal-content">
+                    <h2>Seleccionar fotografía</h2>
+                    <div class="opcion-fotografia" id="opcion-galeria">
+                        <i class="material-icons">image</i>
+                        <span>Elegir desde la galería</span>
+                    </div>
+                    <div class="opcion-fotografia" id="opcion-camara">
+                        <i class="material-icons">camera_alt</i>
+                        <span>Tomar fotografía</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modal" class="modal">
+                <div class="modal-content">
+                    <form class="form" id="formulario" enctype="multipart/form-data">
+                        <div class="titulo-nombre-container">
+                            <h2 id="titulo">Nuevo Empleado</h2>
+                            <div class="nombre-container">
+                                <label for="nombre">Nombre:</label>
+                                <input class="modal1" type="text" id="nombre" name="nombre" placeholder="Ej. Juan">
+                            </div>
+                        </div>
+
+                        <div class="ine-apellidoM-container">
+                            <div class="ine-container">
+                                <span>INE:</span>
+                                <label for="ine-input">
+                                    <img id="ine-preview" src="/images/logo_credencial.jpeg" alt="Logo INE"/>
+                                </label>
+                                <input type="file" id="ine-input" accept="image/*" capture="camera" style="display: none;" name="ine">
+                                <span id="ine-filename"></span>
+                            </div>
+
+                            <div class="apellidoM-container">
+                                <label for="apellido_paterno">Apellido Paterno:</label> 
+                                <input class="modal1" type="text" id="apellido_paterno" placeholder="Ej. Pérez">
+                            </div>
+                        </div>
+
+                        <div class="apellidoP-infonavit-container">
+                            <div class="infonavit-container">
+                                <label for="infonavit">¿INFONAVIT?:</label> 
+                                <div class="checkboxes-infonavit" id="infonavit">
+                                    <input type="checkbox" id="si" name="si">
+                                    <label for="si">Sí</label>
+                                    <input type="checkbox" id="no" name="no">
+                                    <label for="no">No</label>
+                                </div>
+                            </div>
+                            
+                            <div class="apellidoP-container">
+                                <label for="apellido_materno">Apellido Materno:</label>
+                                <input class="modal1" type="text" id="apellido_materno" placeholder="Ej. Gómez">
+                            </div>
+                        </div>
+
+                        <label for="nss">NSS:</label>
+                        <input class="opcional" type="text" id="nss" placeholder="Ej. 56374568901">
+                        
+                        <label for="telefono">Teléfono:</label>    
+                        <input class="modal1" type="text" id="telefono" placeholder="Ej. 5588774466">
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="inputPuesto">Puesto:</label>
+                                <div class="puesto-container">
+                                    <input type="text" id="inputPuesto" name="puesto" autocomplete="off" placeholder="Buscar puesto...">
+                                    <div id="sugerencias" class="sugerencias"></div>
+                                </div>
+                                <p id="mensaje-puesto" class="mensaje-error"></p>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="salarioPuesto">Salario:</label>
+                                <input class="modal1" type="text" id="salarioPuesto" placeholder="$0.00">
+                            </div>
+                            
+                            <div>
+                                <button id="btnGM" type="submit" class="btn btn-guardar">Guardar</button> 
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div id="modal2" class="modal">
+                <div class="modal-content">
+                    <h2>Credencial</h2>
+                    <form class="form">
+                        <img src="/images/Credencial-de-Elector.jpg">
+                    </form>
+                </div>
+            </div>
+
+            <div id="loading-overlay" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p id="p-animacion">Creando empleado...</p>
+            </div>
+    </div>
+
+    <script src="/js/empleados.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>

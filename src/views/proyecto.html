@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Control de INCOSOD</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/proyecto.css">
+</head>
+<body>
+    <div class="container">
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <img src="/images/logo.png" alt="Logotipo">
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons">close</span>
+                </div>
+            </div>
+            <nav class="sidebar">
+                <a href="/index">
+                    <span class="material-icons">grid_view</span>
+                    <h3>Inicio</h3>
+                </a>
+                <a href="/mostrar">
+                    <span class="material-icons">person</span>
+                    <h3>Empleados</h3>
+                </a>
+                <div class="sidebar-item">
+                    <a href="#" class="sidebar-link" onclick="toggleDropdown(event)">
+                      <span class="material-icons">assignment_ind</span>
+                      <h3>Asistencias</h3>
+                      <span class="dropdown-icon material-icons">arrow_drop_down</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="/asistencias-proyectos" class="dropdown-item nav-link">
+                        <span class="material-icons">assignment</span>
+                        <span>Registrar</span>
+                      </a>
+                      <a href="/mostrarAsistencias" class="dropdown-item nav-link">
+                        <span class="material-icons">search</span>
+                        <span>Consultar</span>
+                      </a>
+                    </div>
+                  </div>
+                <a href="/proyectos" id="proyectos">
+                    <span class="material-icons">create</span>
+                    <h3>Proyectos</h3>
+                </a>
+                <a href="/nomina">
+                    <span class="material-icons">payments</span>
+                    <h3>Nómina</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons">text_snippet</span>
+                    <h3>Bitácora</h3>
+                </a>
+                <a href="/registrar-usuarios" id="usuarios">
+                    <span class="material-icons">group</span>
+                    <h3>Usuarios</h3>
+                </a>
+                <a href="/logout">
+                    <span class="material-icons">logout</span>
+                    <h3>Cerrar Sesión</h3>
+                </a>
+            </nav>
+        </aside>
+
+        <main>
+            <div class="tabs">
+                <button id="tab-proyectos" class="tab-button active">Proyectos</button>
+                <button id="tab-cuadrillas" class="tab-button">Cuadrillas</button>
+                <button id="tab-contratistas" class="tab-button">Contratistas</button>
+            </div>
+
+            <div class="tab-content">
+                <div class="tab-pane active">
+                    <h1>Proyectos</h1>
+                    <div class="insights">
+                        <div class="asistencias">
+                            <span class="material-icons">add</span>
+                            <div class="middle">
+                                <div class="left"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane">
+                    <h1>Cuadrillas</h1>
+                    <div class="proyectos-cuadrillas"></div>
+                </div>
+
+                <div class="tab-pane">
+                    <h1>Contratistas</h1>
+                    <div class="table-container">
+                        <table id="tabla-contratistas">
+                            <thead>
+                                <tr>
+                                    <th>Nombre del Contratista</th>
+                                    <th>Proyecto</th>
+                                    <th>Sueldo</th>
+                                    <th>Fecha de Agregado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Las filas de contratistas se agregarán aquí -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modal-fotografia" class="modal">
+                <div class="modal-content">
+                    <span class="closes">&times;</span>
+                    <h2>Seleccionar fotografía</h2>
+                    <div class="opcion-fotografia" id="opcion-galeria">
+                        <i class="material-icons">image</i>
+                        <span>Elegir desde la galería</span>
+                    </div>
+                    <div class="opcion-fotografia" id="opcion-camara">
+                        <i class="material-icons">camera_alt</i>
+                        <span>Tomar fotografía</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modal" class="modal">
+                <form class="form">
+                    <input type="file" id="file-input" accept="image/*" style="display: none;">
+                    <div class="modal-content">
+                        <span class="closes">&times;</span>
+                        <div class="header">
+                            <h2>Nuevo Proyecto</h2>
+                            <span class="material-icons" id="camera-icon">add_a_photo</span>
+                            <div class="budget-container">
+                                <label for="presupuesto" class="budget-label">Presupuesto Inicial:</label>
+                                <input type="text" id="presupuesto" placeholder="$">
+                            </div>
+                        </div>
+
+                        <label for="nombre">Nombre del Proyecto:</label>
+                        <input type="text" id="nombre" placeholder="Ej. Construcción">
+
+                        <label for="apellidoP">Nombre del Encargado:</label>
+                        <input type="text" id="apellidoP" placeholder="Ej. Juan">
+                        <ul id="lista-sugerencias"></ul>
+
+                        <label>Cuadrillas:</label>
+                        <div id="contenedor-empleados">
+                            <div id="empleados-agregados">
+                                <span class="material-icons" id="btn-empleado">add</span>
+                            </div>
+                        </div>
+
+                        <label>Contratistas:</label>
+                        <div id="contenedor-contratistas">
+                            <div id="contratistas-agregados">
+                                <span class="material-icons" id="btn-contratista">add</span>
+                            </div>
+                        </div>
+
+                        <label for="apellidoM">Fecha de Inicio:</label>
+                        <input type="date" id="fechaInicio">
+                        <p id="errorFechaInicio" class="error-message"></p>
+
+                        <label for="telefono">Fecha de Finalización:</label>
+                        <input type="date" id="fechaFin">
+                        <p id="errorFechaFin" class="error-message"></p>
+
+                        <label for="descripcion">Descripción:</label>
+                        <textarea id="descripcion" rows="4" placeholder="Agregar detalle del proyecto"></textarea>
+
+                        <button type="submit" class="btn-guardar">Guardar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="modal-contratistas" class="modal">
+                <div class="modal-content"></div>
+                <span class="closes">&times;</span>
+                
+            </div>
+
+            <div id="modal2" class="modal">
+                <div class="modal-content centered">
+                    <span class="closes">&times;</span>
+                    <h2 id="titulo-proyecto">Descripción del Proyecto</h2>
+
+                    <p id="descripcion-proyecto" class="parrafo-cuadrillas">
+                        Se llevará a cabo la construcción de una casa domótica de 250m2 en la colonia Los Reyes. La casa contará con sistema de control automatizado de iluminación, temperatura, seguridad y entretenimiento integrado.
+                        <br>
+                        El proyecto está a cargo de Constructora S.A. la cual cuenta con 6 cuadrillas especializadas en proyectos de domótica.
+                        <br>
+                        Se utilizarán materiales de alta calidad y diseño vanguardista. Las cuadrillas contarán con las herramientas y equipo más moderno.
+                    </p>
+
+                    <p>Cantidad de cuadrillas: <b id="numero" class="num-cuadrillas" style="color: #0071bc; cursor: pointer;">6 cuadrillas</b></p>
+                    <p>Cantidad de contratistas: <b id="numero-contratistas" class="num-contratistas" style="color: #0071bc; cursor: pointer;">0</b></p>
+
+                    <div class="budget-section">
+                        <div id="budget-container">
+                            <div id="divPresupuestoinicial">
+                                <strong class="strongPresupuestoInicial">Presupuesto Inicial:</strong>
+                            </div>
+                            <div id="budget-actual">
+                                <strong>Presupuesto Actual:</strong>
+                                <span class="presupuesto-actual-valor">
+                                  <input id="presupuesto-actual" type="text" value="$100,200.00">
+                                </span>
+                                <span id="edit-icon" class="material-icons" style="cursor: pointer;">edit</span>
+                                <span id="done-icon" class="material-icons" style="cursor: pointer; display: none;">done</span>
+                                <div id="mensaje-advertencia" class="mensaje-advertencia" style="display: none;"></div>
+                              </div>
+                        </div>
+                    </div>
+
+                    <p class="atte">Encargado del Proyecto:<br>
+                        <strong>José Luis Barrios González</strong>
+                    </p>
+                    <br>
+                    <p><span id="delete-icon" class="material-icons" style="cursor: pointer;">delete</span> Eliminar Proyecto</p>
+
+                </div>
+            </div>
+
+            <div id="modal3" class="modal">
+                <div class="modal-content">
+                    <span class="closes">&times;</span>
+                    <h2>Empleados</h2>
+                    <ul id="lista-empleados" class="employde"></ul>
+                </div>
+            </div>
+
+            <div id="modal-proyectos" class="modal">
+                <div class="modal-content">
+                    <span class="closes">&times;</span>
+                    <h2>Selecciona un Proyecto</h2>
+                    <ul id="lista-proyectos"></ul>
+                    <div class="modal-buttons">
+                        <button id="btn-seleccionar-proyecto" disabled>Seleccionar Proyecto</button>
+                        <button id="btn-cancelar-proyecto">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modal4" class="modal">
+                <div class="modal-content centered">
+                    <span class="closes">&times;</span>
+                    <h2>Seleccione sus Cuadrillas</h2>
+                    <div>
+                        <label for="cantidad-cuadrillas">Cantidad de cuadrillas:</label>
+                        <input type="number" id="cantidad-cuadrillas" min="1">
+                    </div>
+                    <div id="contenedor-inputs"></div>
+                    <div>
+                        <button type="button" id="btn-guardarE" class="btn-guardarE" disabled>Aceptar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modal5" class="modal">
+                <div class="modal-content">
+                    <span class="closes">&times;</span>
+                    <h2>Empleados</h2>
+                    <ul class="employ"></ul>
+                    <button id="asignar" type="button" class="assign-button">Asignar</button>
+                </div>
+            </div>
+
+            <div id="modal6" class="modal">
+                <div class="modal-content">
+                    <span class="closes">&times;</span>
+                    <h2 id="h2-cuadrillas">Cuadrillas</h2>
+                    <div id="card-container" class="card-container" style="width: 500px; max-height: 400px; overflow-y: auto;"></div>
+                </div>
+            </div>
+
+            <div id="modal-asignar-empleados" class="modal">
+                <div class="modal-content">
+                    <span class="closes">&times;</span>
+                    <div class="modal-header">
+                        <span class="modal-title">Asignar empleados a la cuadrilla</span>
+                    </div>
+                    <div class="modal-body">
+                        <ul id="lista-empleados-disponibles"></ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btn-asignar-empleados" class="btn btn-primary">Asignar</button>
+                        <button id="btn-cancelar-asignar" class="btn btn-secondary">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modal-crear-cuadrilla" class="modal">
+                <div class="modal-content">
+                    <span class="closes">&times;</span>
+                    <h2>Crear Cuadrilla</h2>
+                    <input type="text" id="nombre-cuadrilla" placeholder="Nombre de la cuadrilla">
+                    <p id="nombre-cuadrilla-error" class="error-message"></p>
+                    <button id="agregar-empleados-button">Agregar Empleados</button>
+                    <button id="crear-cuadrilla-button">Crear Cuadrilla</button>
+                    <button id="cancelar-crear-cuadrilla-button">Cancelar</button>
+                </div>
+            </div>
+
+            <div id="modal-seleccionar-empleados" class="modal">
+                <div class="modal-content">
+                    <span class="closes">&times;</span>
+                    <h2>Seleccionar Empleados</h2>
+                    <ul id="lista-employees-disponibles"></ul>
+                    <button id="asignar-empleados-button">Asignar</button>
+                    <button id="cancelar-seleccion-button">Cancelar</button>
+                </div>
+            </div>
+
+            <div id="loading-overlay" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p id="p-animacion">Creando proyecto...</p>
+            </div>
+
+        </main>
+
+    
+    </div>
+
+    <script src="/js/proyecto.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>

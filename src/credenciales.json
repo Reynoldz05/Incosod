@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "sistema-incosod",
+  "private_key_id": "d54b96d88872eb66d4cac2ac733760423727ec35",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC05OKXVQwAwIKW\nEPO3WyQzfN3lnRInd4n9rdovf8CG6rpo0c0sCFe/drR6DV9pjotjXZ3ivUPqpe4I\nEt9dpi/+kiEG1bqPCBuGGNQ68ypDqBU2RaoCwHzQWLgrSyQ9FjzM9Ca9TE4QMTBl\nYrxDoLBGxiioaix0C5FdosPqcXEldFx2LT3xQqr6EcBZ8L9ncakunhtj4JAU7pk0\nru0ch1BnnV25kkm4CqGELlltTm7Jv3k5B1PD4Cv4wP7wzA81M5qoFTRhdPfxi1y1\nNdB9q0FuRZMenqI+OrPEvz75M1rmv2Xe2e5mTeZ493bliBc/Q2q/dJXtMRNYsj/l\npoa9eikxAgMBAAECggEADZ44j797kJftjMoYauqN2mFxXA6b1gRKC2K57P7/WbjU\nkT0QJts27edMFW8pymrMhA3Ba9cnRIQ62/k9vxFahh3uphLTgV6RIeJ/IbP6L884\nz5Xlg2EF1HKFZN76iq3ApIZR30jeDJqDY/KPrUCs3Jsg5vLdR1wylJvDB4SESdcs\nyJ8dnGdPci0HRXqxbvIHeaXgdfH5LgGbmycBgqnvdBnQtgWP+P1Ry4ddXMtLxSVM\naYZ0xFCB4SFoTMgGkGz8aWp7z8wwP9t9M2AQKIbn+8r5fWa6JQqM6GUeVEPz/1gm\n/W38U8mWRSQdLYiH2XMXU0ii8LKQe4XgmGZnCnX6BQKBgQD2CGgI1tsgk9rakyf3\nTNksmfco1n04GhWjRHpW/uYN+mFDcXBG2Xkquue0k3Bo7yBgd3ZZBoT/K95JzKjf\n7+GFtXUbmCwcLFmjdarHeRS/I+OqLkPkHe7v/iajIk7LtU0VOe78setWoWRs7G7I\n1OuuWKSsRTH5CXEpqDg0u/YXTQKBgQC8OO2aTwkTAb+jCSnKNgvMO1XhbPmJ3urH\nOd3tAWs9DfFAcMXEuz5dR0bHgO/UdcmaQCPHrmlKk5ziMhdcwLGM4LrH+Egd3BBy\nn5YPQLI+Ba+BiJTGxwa+eR0eKTKcR4EB/dC29CwTtx/vl/Rhp1pATmAIGMy5P90o\niret6zQPdQKBgQCNm88Nb2UWfiOUdOim/XNuqXvJ5JKULOdRXsOvuOz/FKLQ58UA\n8oE8J/HfTJGBxEj1XS0gFpGMMVqzTXnR0scSZ5vs8wxIdvptC/fs8fMQBP8v34sy\nDEyPk8/3S3Lg6wxf8EVu6pUS+rfLvdYSAANbCShXA0i9F0Mr/+fB6oG9bQKBgBZf\nde63ok5+ELdiaXM9xV07WFP5ThgTRTj1Ken4FzUkqR6NyRQ/ZYRU6pbgPqG0dog9\nQ4OCucVBko5YgepmhTRHqiwG2Rujgtj9Gyso94bjyh7Ni1GtaqHNZ6akIv3siesg\nrmRw1aRqSgOCvmu1JscqCcQsnnkOnE0rX/XuVTvZAoGBAOjVjqSIBHxULPDea0yC\nyHG28E0FjgQcgGMDdMywMc8GW1BhySLAorOBtFWb7BLbF3f309otDat4qdXKOeIw\n7zu1KulVBZW9m6Y58rTRtXXJTPBC757CiLuY+2/RXfwdhws8zFQn58uP0Wy0kGKZ\ng9NxodJ7u115pmwc2JdcvF6S\n-----END PRIVATE KEY-----\n",
+  "client_email": "incosod@sistema-incosod.iam.gserviceaccount.com",
+  "client_id": "112255894540932055934",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/incosod%40sistema-incosod.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

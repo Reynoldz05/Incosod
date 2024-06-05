@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Control de INCOSOD</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/css/asistencia_proyecto_usuarios.css">
+</head>
+<body>
+    <div class="container">
+
+        <aside>
+            <div class="top">
+                <!--Aqui se coloca el logo de la empresa-->
+                <div class="logo">
+                    <img src="/images/logo.png" alt="Logotipo">
+                    <h2><span class="color-in">IN</span>COSOD</h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons">
+                        close
+                        </span>
+                </div>
+            </div>
+            <!--Aqui se define el sidebar que contendra los apartados a donde el usuario podra navegar dentro del sistema-->
+            <div class="sidebar">
+
+                <a href="#"  id="panel-control">
+                    <span class="material-icons">grid_view</span>
+                    <h3>Panel de Control</h3>
+                </a>
+                <a href="#" id="p-empleados">
+                    <span class="material-icons">person</span>
+                    <h3>Empleados</h3>
+                </a>
+                <a href="#" id="asistencias">
+                    <span class="material-icons">assignment_ind</span>
+                    <h3>Asistencias</h3>
+                </a>
+                <div class="submenu" id="submenu">
+                    <a id="registro-asistencia"> Registrar Asistencia</a>
+                    <a id="consulta-asistencia"> Consultar Asistencia</a>
+                </div>
+
+                <a href="#" id="proyectos">
+                    <span class="material-icons">create</span>
+                    <h3>Proyectos</h3>
+                </a>
+
+                <a href="#">
+                    <span class="material-icons">payments</span>
+                    <h3>Nómina</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons">text_snippet</span>
+                    <h3>Bitácora</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons">logout</span>
+                    <h3>Cerrar Sesión</h3>
+                </a>
+            </div>
+
+        </aside>
+        <!--------------------------------------------------- FIN DEL ASIDE ------------------------------------------------------>
+        <main>
+            <h1>Asistencia por Proyecto</h1>
+            <div class="header" style="display: none;">
+                <div class="busqueda"> 
+                  <span>Buscar Proyecto:</span>
+                  <div class="input">
+                     <input list="sugerencias-proyecto" type="text" placeholder="Search">
+  
+                     <datalist id="sugerencias-proyecto">
+                       <option value="Casa Domotica">
+                       <option value="Construcción"> 
+                     </datalist>
+                     <span id="search" class="material-icons">search</span> 
+                  </div>
+                </div>
+            </div>
+
+            <!-----------Creacion de la parte derecha Cuadrillas---------->
+            <div class="cuadrillas" style="display: none;"> 
+                <span>Cuadrillas:</span>
+                <div class="checkboxes">
+                    <div id="checkboxes-wrap" class="oculto">
+                        <input type="checkbox" id="cuadrilla1">
+                        <label for="cuadrilla1">Electricistas</label>
+                        <input type="checkbox" id="cuadrilla2">
+                        <label for="cuadrilla2">Plomeros</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Listas desplegables de proyectos y cuadrillas -->
+            <div class="seleccion">
+                <select data-id="{{idUser}}" id="proyectos-select">
+                <option value="">Seleccione un proyecto</option>
+                </select>
+                <select id="cuadrillas-select" disabled>
+                <option value="">Seleccione una cuadrilla</option>
+                </select>
+                <button id="btn-aceptar" disabled>Aceptar</button>
+            </div>  
+
+            <!-- Inputs para establecer las horas de inicio y de fin de la jornada-->
+
+            <div id="horas-jornada" style="display: none;">
+                <label for="hora-inicio">Hora de inicio:</label>
+                <input type="time" id="hora-inicio" required>
+                <label for="hora-fin">Hora de fin:</label>
+                <input type="time" id="hora-fin" required>
+              </div>
+            
+
+            <!--------------Primera Tabla-------------------------->
+            <div id="tabla-container" class="oculto2">
+            <div class="table-container">
+                <h2 id="titulo-cuadrilla"></h2>
+            
+                <table id="tabla-empleados" style="display: none;">
+                    <thead>
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Asistencia</th>
+                        <th>Inasistencia</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+              
+              <div id="pagination-1"></div>
+            </div>
+
+              <div style="text-align: right;">
+                <button class="btn btn-terminar" id="btnTerminarTurno" disabled>Terminar Turno</button>
+                <button class="btn btn-guardar">Guardar</button>  
+            
+              </div>
+            </div>
+
+
+
+             
+        </main>
+                <!--------------------Fin de la seccion del main-->
+             <!-- Ventana Modal al no llegar a Tiempo-->
+             <div id="modal" class="modal">
+
+                <div class="modal-content centered">
+                    <h2>Seleccione los empleados que llegaron tarde</h2>
+
+                      <div class="empleado">
+                        <div class="nombres">
+                            <input type="checkbox" id="empleado2" name="empleado2" onchange="toggleInput('empleado2','hora2')">
+                            <label for="empleado2">Juan Pérez</label>
+                        </div>
+                        <div class="horas">
+                            <input type="text" id="hora2" name="hora2" placeholder="00:00">
+                        </div>
+                      </div>
+
+                      <div class="empleado">
+                        <div class="nombres">
+                            <input type="checkbox" id="empleado3" name="empleado3" onchange="toggleInput('empleado3','hora3')">
+                            <label for="empleado3">Juanita Pérez Saravia Díaz</label>
+                        </div>
+                        <div class="horas">
+                            <input type="text" id="hora3" name="hora3" placeholder="00:00">
+                        </div>
+                      </div>
+                      
+                    <button id="confirmar">Confirmar</button>
+            
+                </div>
+            
+            </div>
+
+
+             <!-- Ventana Modal al no llegar a Tiempo tabla2-->
+             <div id="modal-semana" class="modal">
+
+                <div class="modal-content centered">
+                    <h2>Seleccione los empleados que llegaron tarde</h2>
+
+                      <div class="empleado">
+                        <div class="nombres">
+                            <input type="checkbox" id="empleado4" name="empleado4" onchange="toggleInput('empleado4','hora4')">
+                            <label for="empleado4">José Eduardo</label>
+                        </div>
+                        <div class="horas">
+                            <input type="text" id="hora4" name="hora4" placeholder="00:00">
+                        </div>
+                      </div>
+
+                      <div class="empleado">
+                        <div class="nombres">
+                            <input type="checkbox" id="empleado5" name="empleado5" onchange="toggleInput('empleado5','hora5')">
+                            <label for="empleado5">Jesús Saravia</label>
+                        </div>
+                        <div class="horas">
+                            <input type="text" id="hora5" name="hora5" placeholder="00:00">
+                        </div>
+                      </div>
+                      
+                    <button id="confirmar2">Confirmar</button>
+            
+                </div>
+            
+            </div>
+
+             <!-- Ventana Modal al Terminar el Turno de la Tabla 1-->
+             <div id="modal2" class="modal">
+
+                <div class="modal-content centered">
+                    <h2>Seleccione los empleados que requieran de horas extra!</h2>
+
+                      <div class="empleado">
+                        <div class="nombres">
+                            <input type="checkbox" id="check-1" name="check-1" onchange="toggleHorasExtra('check-1')">
+                            <label for="check-1">Juan Pérez</label>
+                        </div>
+                        <div class="horas">
+                            <input type="number" id="hora-1" value="1" min="1" max="5">
+                        </div>
+                      </div>
+
+                      <div class="empleado">
+                        <div class="nombres">
+                            <input type="checkbox" id="check-2" name="check-2" onchange="toggleHorasExtra('check-2')">
+                            <label for="check-2">Juanita Pérez Saravia Díaz</label>
+                        </div>
+                        <div class="horas">
+                            <input type="number" id="hora-2" value="1" min="1" max="5">
+                        </div>
+                      </div>
+                      
+                    <button id="confirmar-turno">Confirmar</button>
+            
+                </div>
+            
+            </div>
+
+            <!-- Ventana Modal al Terminar el Turno de la Tabla 2-->
+            <div id="modal2-semana" class="modal">
+
+                <div class="modal-content centered">
+                    <h2>Seleccione los empleados que requieran de horas extra!</h2>
+
+                      <div class="empleado">
+                        <div class="nombres">
+                            <input type="checkbox" id="check-3" name="check-3" onchange="toggleHorasExtra('check-3')">
+                            <label for="check-3">José Eduardo</label>
+                        </div>
+                        <div class="horas">
+                            <input type="number" id="hora-3" value="1" min="1" max="5">
+                        </div>
+                      </div>
+
+                      <div class="empleado">
+                        <div class="nombres">
+                            <input type="checkbox" id="check-4" name="check-4" onchange="toggleHorasExtra('check-4')">
+                            <label for="check-4">Jesús Saravia</label>
+                        </div>
+                        <div class="horas">
+                            <input type="number" id="hora-4" value="1" min="1" max="5">
+                        </div>
+                      </div>
+                      
+                    <button id="confirmar-semana">Confirmar</button>
+            
+                </div>
+            
+            </div>
+
+              <!-- Ventana Modal Justificación -->
+              <div id="modal3" class="modal">
+
+                <div class="modal-content centered">
+                    <h2>Faltas Justificadas / No Justificadas</h2>
+
+
+                    <div class="checks">
+                      <div class="empleado">
+                        <div class="nombres">
+                            <input type="checkbox" id="justificada" name="justificada">
+                            <label for="justificada">Justificada</label>
+                        </div>
+                      </div>
+
+                      <div class="empleado">
+                        <div class="nombres">
+                            <input type="checkbox" id="no-justificada" name="no-justificada">
+                            <label for="no-justificada">No Justificada</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                        <label for="descripcion">Descripción:</label>
+                        <textarea id="descripcion" rows="8" placeholder="Agregar detalle del proyecto"></textarea>
+                    
+                    </div>
+
+                    <div class="acciones">
+
+                        <div>
+                            <input type="file" id="file-input" accept="image/*, application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" style="display: none;">
+                            <span id="adjuntar" class="material-icons">attach_file</span>
+                            <span id="adjuntar-etiqueta">Adjuntar Evidencia</span>
+                        </div>
+                      
+                        <button id="terminar">Terminar</button>
+                        
+                      
+                      </div>
+            
+                </div>
+            
+            </div>
+
+            <div id="loading-overlay" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Justificando Falta...</p>
+              </div>
+
+
+            <!-- Modal para seleccionar subir archivo o tomar fotografía -->
+                <div id="modal-evidencia" class="modal">
+                    <div class="modal-content">
+                    <h2>Seleccionar evidencia</h2>
+                    <div class="opciones-evidencia">
+                        <div class="opcion" id="opcion-archivo">
+                        <span class="material-icons">insert_drive_file</span>
+                        <span>Subir archivo</span>
+                        </div>
+                        <div class="opcion" id="opcion-fotografia">
+                        <span class="material-icons">photo_camera</span>
+                        <span>Tomar fotografía</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- Modal de asignar horas laboradas -->
+                <div id="modal-horas-laboradas" class="modal">
+                    <div class="modal-content">
+                    <h2>Establezca las horas laboradas:</h2>
+                    <div id="empleados-horas-laboradas"></div>
+                    <button id="btn-terminar-horas-laboradas" disabled>Terminar</button>
+                    <button id="btn-cancelar-horas-laboradas">Cancelar</button>
+                    </div>
+                </div>
+                
+                <!-- Modal de editar horas laboradas -->
+                <div id="modal-editar-horas-laboradas" class="modal">
+                    <div class="modal-content">
+                    <h2>Editar horas laboradas:</h2>
+                    <div id="empleados-editar-horas-laboradas"></div>
+                    <div id="pagination-editar-horas-laboradas"></div>
+                    <button id="btn-terminar-editar-horas-laboradas" disabled>Terminar</button>
+                    <button id="btn-cancelar-editar-horas-laboradas">Cancelar</button>
+                    </div>
+                </div>
+                
+                
+        
+                <!-------------------Notificación en la parte de abajo------->
+                <div id="notification-bar"></div>
+
+
+                <!-------------------Inicio de la seccion del menu de la parte superior -------------------------------------------- -->
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-icons">menu</span>
+                </button>
+
+                <div class="theme-toggler">
+                    <span class="material-icons active">light_mode</span>
+                    <span class="material-icons">dark_mode</span>
+                </div>
+
+                <div class="profile">
+                    <div class="info">
+                        <small class="text-muted">Admin</small>
+                    </div>
+
+                    <div class="profile-photo">
+                        <img src="./assets/images/profile-1.jpg" alt="foto de perfil">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="/js/asistencia_proyecto_usuarios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+</body>
+
+</html>

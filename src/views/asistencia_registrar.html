@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Asistencias</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/css/asistencia_registrar.css">
+</head>
+<body>
+    <div class="container">
+
+        <aside>
+            <div class="top">
+                <!--Aqui se coloca el logo de la empresa-->
+                <div class="logo">
+                    <img src="/images/logo.png" alt="Logotipo">
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons">
+                        close
+                        </span>
+                </div>
+            </div>
+            <!--Aqui se define el sidebar que contendra los apartados a donde el usuario podra navegar dentro del sistema-->
+            <div class="sidebar">
+
+                <a href="index">
+                    <span class="material-icons">grid_view</span>
+                    <h3>Panel de Control</h3>
+                </a>
+                <a href="/mostrar">
+                    <span class="material-icons">person</span>
+                    <h3>Empleados</h3>
+                </a>
+                <a id="asistencias">
+                    <span class="material-icons">assignment_ind</span>
+                    <h3>Asistencias</h3>
+                </a>
+                <div class="submenu" id="submenu">
+                    <a class="menu-asistencias" href="/registrar-asistencias">
+                        Registrar Asistencia
+                    </a>
+  
+                    <a href="/mostrarAsistencias">
+                        Consultar Asistencias
+                    </a>
+  
+                    <a class="menu-registrar-semanal" href="">
+                        Registrar Asistencia Semanal
+                    </a>
+  
+                    <a href="/consultarAsistenciaSemanal">
+                        Consultar asistencia semanal
+                    </a>
+  
+                </div>
+                <a href="/proyectos" id="proyectos">
+                    <span class="material-icons">create</span>
+                    <h3>Proyectos</h3>
+                </a>
+                
+                <a href="/nomina">
+                    <span class="material-icons">payments</span>
+                    <h3>Nómina</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons">text_snippet</span>
+                    <h3>Bitácora</h3>
+                </a>
+                <a href="/registrar-usuarios" id="usuarios">
+                    <span class="material-icons">group</span>
+                    <h3>Usuarios</h3>
+                </a>
+                <a href="/logout">
+                    <span class="material-icons">logout</span>
+                    <h3>Cerrar Sesión</h3>
+                </a>
+            </div>
+
+        </aside>
+        <!--------------------------------------------------- FIN DEL ASIDE ------------------------------------------------------>
+
+         <!---------------------TARJETAS-->
+        <main>
+            <h1>Registrar Asistencias</h1>
+            <div class="insights">
+                <div class="empleados">
+                    <span class="material-icons">sunny</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>DÍA</h3>
+                        </div>
+                        
+                    </div>
+                </div>
+               
+                <div class="asistencias">
+                    <span class="material-icons">calendar_today</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>SEMANA</h3>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="inasistencias">
+                    <span class="material-icons">engineering</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>PROYECTO</h3>
+                        </div>
+                        
+                    </div>
+                </div>
+        </main>                
+
+                <!-------------------Inicio de la seccion del menu de la parte superior -------------------------------------------- -->
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-icons">menu</span>
+                </button>
+
+                <div class="theme-toggler">
+                    <span class="material-icons active">light_mode</span>
+                    <span class="material-icons">dark_mode</span>
+                </div>
+
+                <div class="profile">
+                    <div class="info">
+                        <small class="text-muted">Admin</small>
+                    </div>
+
+                    <div class="profile-photo">
+                        <img src="./assets/images/profile-1.jpg" alt="foto de perfil">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="/js/asistencia_registrar.js"></script>
+    
+</body>
+
+</html>
